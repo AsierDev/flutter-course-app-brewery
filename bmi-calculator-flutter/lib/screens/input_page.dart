@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'cards.dart';
-import 'slider.dart';
-import 'icon_content.dart';
-import 'constants.dart';
+import '../widgets/cards.dart';
+import '../widgets/slider.dart';
+import '../widgets/icon_content.dart';
+import '../utils/constants.dart';
 
 enum Gender { female, male }
 
