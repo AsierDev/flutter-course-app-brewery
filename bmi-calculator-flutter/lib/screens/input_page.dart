@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../widgets/cards.dart';
+import '../widgets/card_content.dart';
 import '../widgets/slider.dart';
 import '../widgets/icon_content.dart';
+import '../widgets/round_icon_button.dart';
 import '../utils/constants.dart';
 
 enum Gender { female, male }
@@ -16,6 +18,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = kInitialHeight;
+  int weight = kInitialWeight;
+  int age = kInitialAge;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class _InputPageState extends State<InputPage> {
       ),
       body: Column(
         children: <Widget>[
+          // Gender Cards
           Expanded(
             child: Row(
               children: <Widget>[
@@ -56,6 +61,7 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
+          // Height Card
           Expanded(
             child: Cards(
               color: kActiveCardColor,
@@ -90,19 +96,38 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
           ),
+          // Weight and age Cards
           Expanded(
             child: Row(
               children: <Widget>[
+                // Weight
                 Expanded(
-                  child: Cards(color: kActiveCardColor),
+                  child: Cards(
+                    color: kActiveCardColor,
+                    cardChild: CardContent(
+                      amount: weight,
+                      text: 'Weight',
+                      onAdd: () => setState(() => weight++),
+                      onReduce: () => setState(() => weight--),
+                    ),
+                  ),
                 ),
+                // Age
                 Expanded(
-                  child: Cards(color: kActiveCardColor),
+                  child: Cards(
+                    color: kActiveCardColor,
+                    cardChild: CardContent(
+                      amount: age,
+                      text: 'Age',
+                      onAdd: () => setState(() => age++),
+                      onReduce: () => setState(() => age--),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          /* -------  Button ------ */
+          // Calculate Button
           Container(
             margin: EdgeInsets.only(top: 10.0),
             decoration: BoxDecoration(
