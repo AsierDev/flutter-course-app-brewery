@@ -19,6 +19,27 @@ const kNumbersTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const kCalculateButton = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 2.0,
+);
+
+const kResultsTextStyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultsScoreStyle = TextStyle(
+  fontSize: 100,
+  fontWeight: FontWeight.bold,
+);
+
+const kBMIDescriptionStyle = TextStyle(
+  fontSize: 22.0,
+);
+
 //Values
 int kInitialHeight = 170;
 int kInitialWeight = 66;
