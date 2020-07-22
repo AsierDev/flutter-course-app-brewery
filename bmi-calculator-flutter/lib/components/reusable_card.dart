@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Cards extends StatelessWidget {
-  Cards({@required this.color, this.cardChild, this.onPress});
+class ReusableCard extends StatelessWidget {
+  ReusableCard({@required this.colour, this.cardChild, this.onPress});
 
-  final Color color;
+  final Color colour;
   final Widget cardChild;
   final Function onPress;
 
@@ -15,7 +15,7 @@ class Cards extends StatelessWidget {
         child: cardChild,
         margin: EdgeInsets.all(15.0),
         decoration: BoxDecoration(
-          color: color,
+          color: colour,
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
