@@ -9,14 +9,14 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  var itemValue;
+  var selectedCurrency;
 
   CupertinoPicker getIOSPicker() {
     return CupertinoPicker(
       itemExtent: 32.0,
       backgroundColor: Colors.lightBlue,
       onSelectedItemChanged: (value) => setState(() {
-        itemValue = value;
+        selectedCurrency = value;
       }),
       children: currenciesList.map((item) => Text(item)).toList(),
     );
@@ -24,7 +24,7 @@ class _PriceScreenState extends State<PriceScreen> {
 
   DropdownButton getAndroidDropdown() {
     return DropdownButton<String>(
-      value: itemValue ?? 'EUR',
+      value: selectedCurrency ?? 'EUR',
       items: currenciesList
           .map((item) => DropdownMenuItem<String>(
                 value: item,
@@ -32,9 +32,32 @@ class _PriceScreenState extends State<PriceScreen> {
               ))
           .toList(),
       onChanged: (value) => setState(() {
-        itemValue = value;
+        selectedCurrency = value;
       }),
     );
+  }
+
+  Map<String, String> coinValues = {};
+
+  bool isWaiting = false;
+
+  void getData() async {
+    isWaiting = true;
+    try {
+      var data = await CoinData().getCoinData(selectedCurrency);
+      isWaiting = false;
+      setState(() {
+        coinValues = data;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   @override
