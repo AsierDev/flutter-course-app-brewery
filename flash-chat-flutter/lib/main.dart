@@ -22,7 +22,7 @@ class FlashChat extends StatelessWidget {
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
             return MaterialApp(
-              initialRoute: ChatScreen.id,
+              initialRoute: WelcomeScreen.id,
               routes: {
                 WelcomeScreen.id: (context) => WelcomeScreen(),
                 LoginScreen.id: (context) => LoginScreen(),
