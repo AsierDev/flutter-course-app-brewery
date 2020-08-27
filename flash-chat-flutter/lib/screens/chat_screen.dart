@@ -145,6 +145,11 @@ class MessageBubble extends StatelessWidget {
   final String text;
   final bool isMe;
 
+  String getUserName() {
+    var name = sender.indexOf('@');
+    return sender.substring(0, name);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -156,7 +161,7 @@ class MessageBubble extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(bottom: 3.0),
             child: Text(
-              isMe ? 'Me' : sender,
+              isMe ? 'Me' : getUserName(),
               style: TextStyle(
                 fontSize: 13.0,
                 fontWeight: FontWeight.bold,
