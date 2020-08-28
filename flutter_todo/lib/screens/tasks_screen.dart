@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/widgets/task_list.dart';
 import '../utils/constants.dart';
+import 'add_task_screen.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
@@ -8,7 +9,15 @@ class TasksScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: kMainColor,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => print('New task'),
+        onPressed: () => showModalBottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20.0),
+                topLeft: Radius.circular(20.0),
+              ),
+            ),
+            context: context,
+            builder: (context) => AddTaskScreen()),
         backgroundColor: kMainColor,
         child: Icon(
           Icons.add,
@@ -54,19 +63,33 @@ class TasksScreen extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              child: TasksList(),
-              decoration: BoxDecoration(
-                color: kSecondaryColor,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20.0),
-                  topLeft: Radius.circular(20.0),
-                ),
-              ),
-            ),
+          ExpandedContainer(
+            child: TasksList(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ExpandedContainer extends StatelessWidget {
+  const ExpandedContainer({this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        height: 80.0,
+        child: child,
+        decoration: BoxDecoration(
+          color: kSecondaryColor,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20.0),
+            topLeft: Radius.circular(20.0),
+          ),
+        ),
       ),
     );
   }
