@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/widgets/task_list.dart';
 import '../utils/constants.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -7,6 +8,7 @@ class TasksScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: kMainColor,
       floatingActionButton: FloatingActionButton(
+        onPressed: () => print('New task'),
         backgroundColor: kMainColor,
         child: Icon(
           Icons.add,
@@ -54,6 +56,7 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              child: TasksList(),
               decoration: BoxDecoration(
                 color: kSecondaryColor,
                 borderRadius: BorderRadius.only(
