@@ -9,15 +9,7 @@ class TasksScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: kMainColor,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => showModalBottomSheet(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20.0),
-                topLeft: Radius.circular(20.0),
-              ),
-            ),
-            context: context,
-            builder: (context) => AddTaskScreen()),
+        onPressed: () => buildShowModalBottomSheet(context),
         backgroundColor: kMainColor,
         child: Icon(
           Icons.add,
@@ -67,6 +59,25 @@ class TasksScreen extends StatelessWidget {
             child: TasksList(),
           ),
         ],
+      ),
+    );
+  }
+
+  Future buildShowModalBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20.0),
+          topLeft: Radius.circular(20.0),
+        ),
+      ),
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        child: AddTaskScreen(),
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
       ),
     );
   }

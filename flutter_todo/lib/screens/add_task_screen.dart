@@ -5,7 +5,8 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(30.0),
+      padding:
+          EdgeInsets.only(top: 30.0, right: 30.0, bottom: 20.0, left: 30.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -21,7 +22,7 @@ class AddTaskScreen extends StatelessWidget {
             style: TextStyle(fontSize: 18.0),
           ),
           SizedBox(
-            height: 15.0,
+            height: 20.0,
           ),
           FlatButton(
             onPressed: () {},
