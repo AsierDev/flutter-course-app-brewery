@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/utils/constants.dart';
 
-class TaskTile extends StatefulWidget {
-  @override
-  _TaskTileState createState() => _TaskTileState();
-}
-
-class _TaskTileState extends State<TaskTile> {
-  bool isChecked = false;
+class TaskTile extends StatelessWidget {
+  TaskTile({this.isChecked, this.taskTitle, this.toggleCheckbox});
+  final String taskTitle;
+  final bool isChecked;
+  final Function toggleCheckbox;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        'Task 1',
+        taskTitle,
         style: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.w700,
@@ -21,29 +19,11 @@ class _TaskTileState extends State<TaskTile> {
           decorationThickness: 2.5,
         ),
       ),
-      trailing: TaskCheckbox(
-          checkBoxState: isChecked,
-          onChange: (bool checkboxState) {
-            setState(() {
-              isChecked = checkboxState;
-            });
-          }),
-    );
-  }
-}
-
-class TaskCheckbox extends StatelessWidget {
-  TaskCheckbox({this.checkBoxState, this.onChange});
-
-  final bool checkBoxState;
-  final Function onChange;
-
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      activeColor: kMainColor,
-      value: checkBoxState,
-      onChanged: (newValue) => onChange(newValue),
+      trailing: Checkbox(
+        activeColor: kMainColor,
+        value: isChecked,
+        onChanged: toggleCheckbox,
+      ),
     );
   }
 }
