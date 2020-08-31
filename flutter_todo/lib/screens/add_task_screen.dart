@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/models/tasks_data.dart';
 import 'package:flutter_todo/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
   AddTaskScreen({this.onAddTask});
@@ -33,8 +35,13 @@ class AddTaskScreen extends StatelessWidget {
             height: 20.0,
           ),
           FlatButton(
+            // onPressed: () {
+            //   onAddTask(taskName);
+            // },
             onPressed: () {
-              onAddTask(taskName);
+              Provider.of<TasksData>(context, listen: false)
+                  .addNewTask(taskName);
+              Navigator.pop(context);
             },
             child: Text(
               'Add',

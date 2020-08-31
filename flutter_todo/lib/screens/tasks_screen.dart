@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/models/task.dart';
 import 'package:flutter_todo/widgets/task_list.dart';
-import '../utils/constants.dart';
+import 'package:provider/provider.dart';
 import 'add_task_screen.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
+import '../utils/constants.dart';
+import '../models/tasks_data.dart';
 
-class _TasksScreenState extends State<TasksScreen> {
-  final List<Task> tasks = [];
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +49,8 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} tasks',
+                  // TODO: ADD GETTER
+                  '${Provider.of<TasksData>(context).tasks.length} tasks',
                   style: TextStyle(
                     color: kSecondaryColor,
                     fontSize: 18.0,
@@ -64,13 +60,13 @@ class _TasksScreenState extends State<TasksScreen> {
             ),
           ),
           ExpandedContainer(
-            child: TasksList(
-                tasks: tasks,
-                onToggleTask: (task) {
-                  setState(() {
-                    task.toggleDone();
-                  });
-                }),
+            child: TasksList(),
+            // tasks: tasks,
+            // onToggleTask: (task) {
+            //   setState(() {
+            //     task.toggleDone();
+            //   });
+            // }),
           ),
         ],
       ),
@@ -78,6 +74,7 @@ class _TasksScreenState extends State<TasksScreen> {
   }
 
   Future buildShowModalBottomSheet(BuildContext context) {
+    print('yoo');
     return showModalBottomSheet(
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
@@ -89,14 +86,14 @@ class _TasksScreenState extends State<TasksScreen> {
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AddTaskScreen(
-          onAddTask: (newTask) {
-            setState(() {
-              print(newTask);
-              tasks.add(Task(name: newTask));
-            });
-            Navigator.pop(context);
-          },
-        ),
+            // onAddTask: (newTask) {
+            //   setState(() {
+            //     print(newTask);
+            //     tasks.add(Task(name: newTask));
+            //   });
+            //   Navigator.pop(context);
+            // },
+            ),
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
