@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/models/task.dart';
 import 'package:flutter_todo/widgets/task_list.dart';
 import '../utils/constants.dart';
 import 'add_task_screen.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  final List<Task> tasks = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +54,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 tasks',
+                  '${tasks.length} tasks',
                   style: TextStyle(
                     color: kSecondaryColor,
                     fontSize: 18.0,
@@ -56,7 +64,13 @@ class TasksScreen extends StatelessWidget {
             ),
           ),
           ExpandedContainer(
-            child: TasksList(),
+            child: TasksList(
+                tasks: tasks,
+                onToggleTask: (task) {
+                  setState(() {
+                    task.toggleDone();
+                  });
+                }),
           ),
         ],
       ),
@@ -74,7 +88,15 @@ class TasksScreen extends StatelessWidget {
       ),
       context: context,
       builder: (context) => SingleChildScrollView(
-        child: AddTaskScreen(),
+        child: AddTaskScreen(
+          onAddTask: (newTask) {
+            setState(() {
+              print(newTask);
+              tasks.add(Task(name: newTask));
+            });
+            Navigator.pop(context);
+          },
+        ),
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),

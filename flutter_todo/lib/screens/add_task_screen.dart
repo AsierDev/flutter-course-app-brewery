@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/utils/constants.dart';
 
 class AddTaskScreen extends StatelessWidget {
+  AddTaskScreen({this.onAddTask});
+
+  final Function onAddTask;
+
   @override
   Widget build(BuildContext context) {
+    String taskName;
     return Container(
       padding:
           EdgeInsets.only(top: 30.0, right: 30.0, bottom: 20.0, left: 30.0),
@@ -20,12 +25,17 @@ class AddTaskScreen extends StatelessWidget {
             autofocus: true,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18.0),
+            onChanged: (text) {
+              taskName = text;
+            },
           ),
           SizedBox(
             height: 20.0,
           ),
           FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              onAddTask(taskName);
+            },
             child: Text(
               'Add',
               style: TextStyle(

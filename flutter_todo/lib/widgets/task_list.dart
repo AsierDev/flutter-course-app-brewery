@@ -3,17 +3,11 @@ import 'package:flutter_todo/models/task.dart';
 
 import 'task_tile.dart';
 
-class TasksList extends StatefulWidget {
-  @override
-  _TasksListState createState() => _TasksListState();
-}
+class TasksList extends StatelessWidget {
+  TasksList({@required this.tasks, this.onToggleTask});
 
-class _TasksListState extends State<TasksList> {
-  List<Task> tasks = [
-    Task(name: 'Task to do'),
-    Task(name: 'Task to do'),
-    Task(name: 'Task to do'),
-  ];
+  final List<Task> tasks;
+  final Function onToggleTask;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +20,7 @@ class _TasksListState extends State<TasksList> {
           isChecked: tasks[index].isDone,
           taskTitle: tasks[index].name,
           toggleCheckbox: (bool checkboxState) {
-            setState(() {
-              tasks[index].toggleDone();
-            });
+            onToggleTask(tasks[index]);
           },
         );
       },
