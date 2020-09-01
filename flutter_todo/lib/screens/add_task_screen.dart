@@ -35,9 +35,6 @@ class AddTaskScreen extends StatelessWidget {
             height: 20.0,
           ),
           FlatButton(
-            // onPressed: () {
-            //   onAddTask(taskName);
-            // },
             onPressed: () {
               Provider.of<TasksData>(context, listen: false)
                   .addNewTask(taskName);
